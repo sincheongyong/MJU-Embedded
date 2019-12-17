@@ -1,4 +1,4 @@
-CXX=arm-linux-gnueabihf-g++
+CXX=arm-linux-gnueabihf-g++ //C++ 파일을 컴파일 할 때에는 gcc가 아닌 g++로 설정해야한다.
 CC = arm-linux-gnueabi-gcc
 AR = arm-linux-gnueabi-ar
 
