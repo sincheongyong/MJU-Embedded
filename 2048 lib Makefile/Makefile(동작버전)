@@ -1,0 +1,79 @@
+CXX=arm-linux-gnueabihf-g++ //C++ 파일을 컴파일 할 때에는 gcc가 아닌 g++로 설정해야한다.
+CC = arm-linux-gnueabi-gcc
+AR = arm-linux-gnueabi-ar
+
+all :
+	$(CXX) -c fnd.c -o fnd.o
+	$(CXX) -c button.c -o button.o -lpthread
+	$(CXX) -c lcdtext.c -o lcdtext.o
+	$(CXX) -c led.c -o led.o
+	$(CXX) -c buzzer.c -o buzzer.o
+	$(AR) rc libMyPeri.a fnd.o button.o lcdtext.o led.o buzzer.o
+	$(AR) rc libMyLib.a libBitmap.o project.o	
+
+	#$(CC) -O3 2048.c -o 2048 -L. -l MyPeri -l MyLib -lpthread --static
+	$(CXX) 2048.cpp -o 2048 libMyPeri.a libMyLib.a -lpthread --static -Wl,--start-group \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_aruco.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_bgsegm.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_bioinspired.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_calib3d.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_ccalib.a \
+	-ldl \
+	-lstdc++ \
+	-lm \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_datasets.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_dnn.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_dnn_objdetect.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_dpm.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_face.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_features2d.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_flann.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_fuzzy.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_gapi.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_hfs.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_highgui.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_core.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_imgproc.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_img_hash.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_imgcodecs.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_line_descriptor.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_ml.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_objdetect.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_optflow.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_phase_unwrapping.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_photo.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_plot.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_reg.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_rgbd.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_saliency.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_shape.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_stereo.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_stitching.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_structured_light.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_superres.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_surface_matching.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_text.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_tracking.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_ts.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_video.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_videoio.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_videostab.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_xfeatures2d.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_ximgproc.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_xobjdetect.a \
+	/usr/lib/gcc-cross/arm-linux-gnueabihf/7/libopencv_xphoto.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/libIlmImf.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/libade.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/liblibjasper.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/liblibjpeg-turbo.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/liblibpng.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/liblibprotobuf.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/liblibtiff.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/liblibwebp.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/libquirc.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/libtegra_hal.a \
+	/home/cheong-yong/pz/opencv-4.0.1/build/install/lib/opencv4/3rdparty/libzlib.a -lpthread -Wl,--end-group --static \
+	#$(CC) 2048.c -o 2048 libMyPeri.a -lpthread
+	
+clean :
+	rm 2048 fnd.o button.o lectext.o led.o buzzer.o libMyPeri.a libMyLib.a
